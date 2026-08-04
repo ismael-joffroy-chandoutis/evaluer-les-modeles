@@ -1,0 +1,13 @@
+.venv/
+logs*/
+__pycache__/
+*.eval
+.pytest_cache/
+yourbench/sortie/
+yourbench/traite/
+yourbench/jsonl/
+harbor/fidelite-timeline/montage.fcpxml
+
+# Le jeu d'epreuves reel ne se publie jamais.
+# Decommenter apres avoir remplace les items d'exemple par les siens :
+# items/*.jsonl

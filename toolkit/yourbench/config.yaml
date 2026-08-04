@@ -1,0 +1,49 @@
+# YourBench : fabriquer du volume ancre a partir de pieces reelles.
+# Tout en local, rien ne part sur le Hub : un jeu d'epreuves prive n'a rien
+# a faire chez un tiers.
+#
+# Lancer :  yourbench run yourbench/config.yaml
+# Prerequis : OPENROUTER_API_KEY dans l'environnement.
+
+hf_configuration:
+  hf_dataset_name: banc-atelier-exemple
+  local_dataset_dir: yourbench/sortie
+  local_saving: true
+  push_to_hub: false
+  upload_card: false
+  export_jsonl: true
+  jsonl_export_dir: yourbench/jsonl
+
+model_list:
+  - model_name: openai/gpt-5.4-mini
+    base_url: https://openrouter.ai/api/v1
+    api_key: $OPENROUTER_API_KEY
+    max_concurrent_requests: 4
+
+model_roles:
+  summarization: [openai/gpt-5.4-mini]
+  single_hop_question_generation: [openai/gpt-5.4-mini]
+
+pipeline:
+  ingestion:
+    run: true
+    source_documents_dir: yourbench/source
+    output_dir: yourbench/traite
+    upload_to_hub: false
+
+  summarization:
+    run: true
+
+  chunking:
+    run: true
+    l_max_tokens: 1024
+    token_overlap: 128
+
+  single_hop_question_generation:
+    run: true
+    question_mode: open-ended
+    additional_instructions: >
+      Ecris les questions en francais. Chaque question doit pouvoir se repondre
+      uniquement avec le passage cite, et sa reponse doit citer ce passage.
+      Privilegie les questions dont la reponse est un fait verifiable
+      (chiffre, support, procedure) plutot que des questions d'interpretation.
