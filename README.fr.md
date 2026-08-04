@@ -4,6 +4,9 @@
 
 Proposition de protocole d'évaluation des modèles, écrite depuis une pratique de création plutôt que depuis un laboratoire.
 
+<img src="monde.jpg" width="100%" alt="">
+
+
 **[Lire la proposition](banc-d-essai-atelier.md)**
 
 Trois faits ferment le débat sur les classements publics. Seize pour cent des bancs d'essai publiés utilisent des estimations d'incertitude ou des tests statistiques. Soixante-trois pour cent de ceux qui sont mis en avant ne servent qu'à un seul constructeur de modèles. Et aucun système automatique d'évaluation esthétique ne dépasse 0,55 d'accord avec un jury de professionnels, soit à peine mieux que le hasard.

@@ -4,6 +4,9 @@
 
 A proposed protocol for evaluating models, written from a creative practice rather than from a lab.
 
+<img src="monde.jpg" width="100%" alt="">
+
+
 **[Read the proposal](banc-d-essai-atelier.md)** (in French)
 
 Three findings close the case on public leaderboards. Sixteen percent of published benchmarks use uncertainty estimates or statistical tests. Sixty-three percent of the benchmarks put forward serve a single model builder. And no automatic aesthetic scorer exceeds 0.55 agreement with a jury of professionals, barely above chance.
