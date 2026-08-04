@@ -4,19 +4,25 @@
 
 ---
 
+## De quoi il s'agit
+
+Un banc d'essai, en apprentissage automatique, est une série d'épreuves standardisées que l'on fait passer à des modèles pour les comparer. Les plus connus sont publics : MMLU pour les connaissances, SWE-bench pour la programmation, les arènes de préférence où deux réponses anonymes sont soumises au vote. Leurs scores servent d'argument commercial le jour où un modèle sort, et de boussole au reste du monde pour choisir quel modèle utiliser.
+
+Le texte qui suit part d'un constat simple : ces scores ne disent rien d'utile à quelqu'un qui fabrique des œuvres avec ces modèles. Non parce qu'ils seraient mal faits, mais parce qu'ils mesurent autre chose. Il propose donc un protocole de rechange, conçu pour une pratique artistique qui travaille avec des agents, et qui a aussi besoin de ces modèles pour du code, de l'administratif, du juridique et de la recherche documentaire. Ce protocole n'est pas un instrument scientifique et ne prétend pas l'être : sa validité est locale par construction, et c'est précisément ce qui le rend utile là où les instruments universels ne disent rien.
+
 ## Pourquoi les classements publics ne servent à rien ici
 
-Trois faits, tous documentés cette année, suffisent à fermer le débat.
+Trois faits, tous documentés en 2025 et 2026, suffisent à fermer le débat.
 
-Le premier vient de l'audit le plus large jamais mené sur le sujet : sur quatre cent quarante-cinq bancs d'essai examinés en détail, **seize pour cent** utilisent des estimations d'incertitude ou des tests statistiques. Le reste publie des scores sans marge d'erreur. Un second audit ajoute que **soixante-trois pour cent** des bancs d'essai mis en avant ne sont utilisés que par un seul constructeur de modèles. Une part massive de l'écosystème d'évaluation est du marketing sur mesure.
+Le premier vient de l'audit le plus large mené sur le sujet, *Measuring what Matters: Construct Validity in Large Language Model Benchmarks* (Bean et al., NeurIPS 2025) : sur quatre cent quarante-cinq bancs d'essai examinés en détail par vingt-neuf experts, **seize pour cent** utilisent des estimations d'incertitude ou des tests statistiques. Le reste publie des scores sans marge d'erreur. Un second audit, présenté à FAccT 2026, ajoute que **soixante-trois pour cent** des bancs d'essai mis en avant ne sont utilisés que par un seul constructeur de modèles. Une part massive de l'écosystème d'évaluation est du marketing sur mesure.
 
-Le deuxième concerne le goût. Deux cohortes disjointes de designers professionnels ont classé les sorties des principaux générateurs d'images sur neuf critères. Il y a bien un signal de préférence professionnelle, robuste, qui rejette l'hypothèse du hasard. Mais **aucun système automatique d'évaluation esthétique ne dépasse 0,55 d'accord** avec ce consensus, le meilleur étant à peine au-dessus du tirage au sort. Et les plus gros modèles de vision ne font pas mieux : le problème n'est pas l'échelle, il est structurel. Les métriques esthétiques sur lesquelles toute l'industrie s'appuie ne mesurent pas le goût.
+Le deuxième concerne le goût, et il vient du benchmark TASTE (Zhu et al., 2026). Deux cohortes disjointes de cinq designers professionnels chacune ont classé les sorties des principaux générateurs d'images sur neuf critères, de la typographie à la hiérarchie visuelle. Il y a bien un signal de préférence professionnelle, robuste, qui rejette l'hypothèse du hasard sur les neuf critères. Mais **aucun système automatique d'évaluation esthétique ne dépasse 0,55 d'accord** avec ce consensus, le meilleur étant à peine au-dessus du tirage au sort. Et les plus gros modèles de vision ne font pas mieux : le problème n'est pas l'échelle, il est structurel. Les métriques esthétiques sur lesquelles toute l'industrie s'appuie ne mesurent pas le goût.
 
-Le troisième est le plus intéressant pour un artiste. Le seul travail qui refuse de traiter le désaccord entre évaluateurs comme du bruit sépare explicitement deux zones : la convergence se concentre sur les dimensions vérifiables (justesse technique, hiérarchie visuelle), la divergence sur les dimensions de goût (direction esthétique, prise de risque). Écraser les deux en une seule note détruit précisément l'information qui compte : où le modèle doit être **exact**, et où il doit être **pilotable**.
+Le troisième est le plus intéressant pour un artiste, et il vient du Human Creativity Benchmark publié par Contra Labs en juin 2026, quinze mille jugements de professionnels sur cinq domaines créatifs. C'est le seul travail qui refuse de traiter le désaccord entre évaluateurs comme du bruit : il sépare explicitement deux zones, la convergence se concentrant sur les dimensions vérifiables (justesse technique, hiérarchie visuelle), la divergence sur les dimensions de goût (direction esthétique, prise de risque conceptuelle). Écraser les deux en une seule note détruit précisément l'information qui compte : où le modèle doit être **exact**, et où il doit être **pilotable**.
 
 À quoi s'ajoute une dérive qu'aucun classement grand public ne pénalise : l'homogénéisation. La diversité marginale de chaque texte supplémentaire produit par un modèle décroît plus vite que chez les humains, et les arènes de préférence récompensent structurellement la complaisance. Un modèle qui donnerait toujours la même bonne réponse dominerait les classements de créativité existants. Pour quelqu'un dont le métier est l'écart, c'est disqualifiant.
 
-Conclusion : il n'y a pas de banc d'essai à choisir, il y en a un à construire. Et la personne qui a bâti les instruments d'évaluation de Hugging Face le dit dans les mêmes termes : les classements publics ne mesurent pas une capacité générale, seule compte une évaluation spécifique à l'usage réel.
+Conclusion : il n'y a pas de banc d'essai à choisir, il y en a un à construire. Et Clémentine Fourrier, qui a dirigé l'effort d'évaluation de Hugging Face entre 2023 et 2025 et signé son *LLM Evaluation Guidebook*, le dit dans les mêmes termes : les classements publics ne mesurent pas une capacité générale, seule compte une évaluation spécifique au cas d'usage réel.
 
 ---
 
@@ -108,13 +114,13 @@ Rien de tout cela n'est à écrire de zéro. L'outillage existe, il est libre, e
 
 **Harbor**, successeur de Terminal-Bench, prend tout ce qui a une vérification objective : un script qui doit produire le bon média, un fichier de montage qui doit être valide, un correctif qui doit compiler. Il fait tourner de vrais agents en ligne de commande dans des conteneurs. C'est le projet le plus vivant du domaine à ce jour.
 
-La brique de plus, et c'est celle qu'on oublie toujours : **calibrer le jury avant de lui faire confiance**. Il existe un instrument pour ça, qui ne mesure pas les modèles mais les **juges** : leur stabilité d'un tour à l'autre et leur capacité à séparer un bon texte d'un excellent. Un détail contre-intuitif y est documenté et mérite d'être retenu : faire débattre les juges entre eux **dégrade** la qualité du jugement. Le jury doit voter, pas délibérer.
+La brique de plus, et c'est celle qu'on oublie toujours : **calibrer le jury avant de lui faire confiance**. Judgemark, développé dans la famille EQ-Bench, sert exactement à ça : il ne mesure pas les modèles, il mesure les **juges**, leur stabilité d'un tour à l'autre et leur capacité à séparer un bon texte d'un excellent. Un détail contre-intuitif y est documenté et mérite d'être retenu : leur mode « book club », où les juges débattent avant de noter, **dégrade** la qualité du jugement, les juges étant meilleurs avec le moins de distracteurs en contexte. Le jury doit voter, pas délibérer.
 
 Ce que je n'utiliserais pas, et pour une raison de fond : les plateformes propriétaires d'observabilité. Un jeu d'épreuves privé dont l'intérêt est de ne jamais fuiter n'a rien à faire chez un tiers, quel que soit le confort de l'interface.
 
 L'ordre de construction compte plus que l'outillage. **Le premier jour ne consiste pas à installer, il consiste à écrire cinquante épreuves à la main**, dix par catégorie, tirées de travail réel. Ce sont les seules dont on sait avec certitude ce qu'elles valent, et elles servent ensuite à juger tout ce que la génération automatique produira. Les rubriques viennent ensuite, la génération de volume après, les tâches agentiques après encore, et la calibration du jury en dernier avant de figer une version datée. Compter une vingtaine d'heures de travail effectif et quelques dizaines d'euros d'appels pour un premier cycle complet.
 
-Une dernière règle, empruntée à un incident réel du domaine : une version figée ne se modifie jamais en place. Un banc d'essai dont on corrige la notation en cours de route produit des scores qui ne sont plus comparables entre eux, et on ne s'en aperçoit qu'après avoir tiré des conclusions.
+Une dernière règle, empruntée à un incident survenu sur tau-bench en juillet 2026 : une version figée ne se modifie jamais en place. Leur version 1.0.1 a corrigé la notation d'un domaine, rendant du même coup incomparables tous les résultats produits avec la version antérieure. Un banc d'essai dont on corrige la notation en cours de route produit des scores qui ne sont plus comparables entre eux, et on ne s'en aperçoit qu'après avoir tiré des conclusions.
 
 ---
 
